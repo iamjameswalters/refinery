@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "refinery"
+version = "0.1.0"
+description = "A scripture memory app based on Andrew Davis's method."
+authors = ["James Walters <33947683+iamjameswalters@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^5.0.6"
+django-htmx = "^1.18.0"
+
+[tool.poetry.group.dev.dependencies]
+django-debug-toolbar = "^4.4.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
