@@ -13,6 +13,7 @@ pible = "^0.2"
 
 [tool.poetry.group.dev.dependencies]
 django-debug-toolbar = "^4.4.2"
+ruff = "^0.5.1"
 
 [build-system]
 requires = ["poetry-core"]
