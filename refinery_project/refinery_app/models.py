@@ -14,11 +14,11 @@ class CustomUser(AbstractUser):
 
 
 class Plan(models.Model):
-    current_book = models.ForeignKey("Book", on_delete=models.RESTRICT)
-    current_verse = models.ForeignKey("Verse", on_delete=models.RESTRICT)
+    current_book = models.ForeignKey("Book", on_delete=models.RESTRICT, related_name="current_plan")
+    current_verse = models.ForeignKey("Verse", on_delete=models.RESTRICT, related_name="current_plan")
     verses_per_day = models.SmallIntegerField(choices=[(i, i) for i in range(1, 11)])
     days_of_review = models.SmallIntegerField(default=100)
-    translation = models.CharField(choices=TRANSLATIONS)
+    translation = models.CharField(choices=TRANSLATIONS, max_length=5)
     api_key = models.CharField(max_length=40, blank=True)
 
     class Meta:
@@ -33,13 +33,13 @@ class Plan(models.Model):
 
 class Book(models.Model):
     plan = models.ForeignKey(Plan, on_delete=models.CASCADE)
-    title = models.CharField(choices={book: book for book in Bible().books})
+    title = models.CharField(choices={book: book for book in Bible().books}, max_length=50)
     completed = models.BooleanField(default=False)
 
 
 class Verse(models.Model):
     plan = models.ForeignKey(Plan, on_delete=models.CASCADE)
-    book = models.CharField(choices={book: book for book in Bible().books})
+    book = models.CharField(choices={book: book for book in Bible().books}, max_length=50)
     chapter = models.SmallIntegerField()
     verse_number = models.SmallIntegerField()
     days_reviewed = models.SmallIntegerField(default=1)
