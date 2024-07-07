@@ -14,8 +14,8 @@ class CustomUser(AbstractUser):
 
 
 class Plan(models.Model):
-    current_book = models.ForeignKey("Book")
-    current_verse = models.ForeignKey("Verse")
+    current_book = models.ForeignKey("Book", on_delete=models.RESTRICT)
+    current_verse = models.ForeignKey("Verse", on_delete=models.RESTRICT)
     verses_per_day = models.SmallIntegerField(choices=[(i, i) for i in range(1, 11)])
     days_of_review = models.SmallIntegerField(default=100)
     translation = models.CharField(choices=TRANSLATIONS)
