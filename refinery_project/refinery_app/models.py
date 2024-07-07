@@ -33,13 +33,13 @@ class Plan(models.Model):
 
 class Book(models.Model):
     plan = models.ForeignKey(Plan, on_delete=models.CASCADE)
-    title = models.CharField(choices={book: book for book in Bible().books}, max_length=50)
+    title = models.CharField(choices={book._title: book._title for book in Bible().books}, max_length=50)
     completed = models.BooleanField(default=False)
 
 
 class Verse(models.Model):
     plan = models.ForeignKey(Plan, on_delete=models.CASCADE)
-    book = models.CharField(choices={book: book for book in Bible().books}, max_length=50)
+    book = models.CharField(choices={book._title: book._title for book in Bible().books}, max_length=50)
     chapter = models.SmallIntegerField()
     verse_number = models.SmallIntegerField()
     days_reviewed = models.SmallIntegerField(default=1)
