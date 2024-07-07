@@ -68,6 +68,20 @@ asgiref = ">=3.6"
 django = ">=3.2"
 
 [[package]]
+name = "pible"
+version = "0.2"
+description = "A Python library for working with Bible books and verses."
+optional = false
+python-versions = "*"
+files = [
+    {file = "pible-0.2-py2.py3-none-any.whl", hash = "sha256:a40388d502b9a0cad81451829fc8511f931dc4f91679521f037411f6a7ff15a9"},
+    {file = "pible-0.2.tar.gz", hash = "sha256:285768b073e9cdde1f45ee6f886411a42463d4c1914c60d61b960616d2f7f4ee"},
+]
+
+[package.extras]
+ujson = ["ujson"]
+
+[[package]]
 name = "sqlparse"
 version = "0.5.0"
 description = "A non-validating SQL parser."
@@ -107,4 +121,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "43cb57cb09fd6196cd9733aee288bf13c4327e3a386ae59622fc4c9434f5874d"
+content-hash = "f58c65ec103a93817d75ef4d7dc7b297445e7e513d3f42f4cac8f6110a22b74a"
