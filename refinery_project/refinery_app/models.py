@@ -15,7 +15,8 @@ class CustomUser(AbstractUser):
 
 class Plan(models.Model):
     current_book = models.ForeignKey("Book", on_delete=models.RESTRICT, related_name="current_plan")
-    current_verse = models.ForeignKey("Verse", on_delete=models.RESTRICT, related_name="current_plan")
+    previous_stop = models.ForeignKey("Verse", on_delete=models.RESTRICT, related_name="current_plan")
+    current_stop = models.ForeignKey("Verse", on_delete=models.RESTRICT, related_name="current_plan")
     verses_per_day = models.SmallIntegerField(choices=[(i, i) for i in range(1, 11)])
     days_of_review = models.SmallIntegerField(default=100)
     translation = models.CharField(choices=TRANSLATIONS, max_length=5)
@@ -27,6 +28,10 @@ class Plan(models.Model):
                 check=models.Q(translation="ESV", api_key__isnull=False)
                 | ~models.Q(translation="ESV"),
                 name="require_api_key_for_esv",
+            ),
+            models.CheckConstraint(
+                check=~models.Q(previous_verse=models.F('current_verse')),
+                name="different_current_and_previous_verses"
             )
         ]
 
