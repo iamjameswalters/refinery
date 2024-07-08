@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import TemplateView, CreateView
 
-from . import models
+from . import forms, models
 
 # Create your views here.
 
@@ -17,7 +17,8 @@ class HomePage(TemplateView):
         return context
     
 
-# class NewPlan(CreateView):
-#     template_name = "refinery/new_plan.html"    
-#     model = models.Plan
+class NewPlan(CreateView):
+    template_name = "refinery/new_plan.html"    
+    model = models.Plan
+    form_class = forms.PlanForm
     

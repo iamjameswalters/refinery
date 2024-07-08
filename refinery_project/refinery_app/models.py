@@ -15,22 +15,22 @@ class CustomUser(AbstractUser):
 
 
 class Plan(models.Model):
-    current_book = models.ForeignKey("Book", on_delete=models.RESTRICT, related_name="current_plan")
-    previous_stop = models.ForeignKey("Verse", on_delete=models.RESTRICT, related_name="_current_plan")
-    current_stop = models.ForeignKey("Verse", on_delete=models.RESTRICT, related_name="current_plan")
+    current_book = models.ForeignKey("Book", on_delete=models.RESTRICT, related_name="current_plan", null=True)
+    previous_stop = models.ForeignKey("Verse", on_delete=models.RESTRICT, related_name="_current_plan", null=True)
+    current_stop = models.ForeignKey("Verse", on_delete=models.RESTRICT, related_name="current_plan", null=True)
     verses_per_day = models.SmallIntegerField(choices=[(i, i) for i in range(1, 11)])
     days_of_review = models.SmallIntegerField(default=100)
     translation = models.CharField(choices=TRANSLATIONS, max_length=5)
     api_key = models.CharField(max_length=40, blank=True)
 
     def get_absolute_url(self):
-        return reverse("home")
+        return reverse_lazy("home")
     
 
     class Meta:
         constraints = [
             models.CheckConstraint(
-                check=models.Q(translation="ESV", api_key__isnull=False)
+                check=(models.Q(translation="ESV") and ~models.Q(api_key=""))
                 | ~models.Q(translation="ESV"),
                 name="require_api_key_for_esv",
             )
