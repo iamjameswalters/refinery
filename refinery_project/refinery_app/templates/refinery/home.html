@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex align-items-center justify-content-center h-100">
+    <div>
+        <h1 class="text-center mb-5">Refinery</h1>
+
+        <div class="text-center fs-3">
+        {% if plan %}
+        You're working your way through<br />{{plan.current_book.title}}
+
+        <br /><br />You left off at {{plan.current_stop.chapter}}:{{plan.current_stop.verse_number}}.
+
+        <br /><br />Ready to get back at it?
+        <br /><br />
+        <a class="btn btn-primary" href="#">Start Today's Verses</a>
+
+        {% else %}
+        Refinery is an app for memorizing books of the Bible.
+
+        <br /><br />Ready to get started?
+        <br /><br />
+        <a class="btn btn-primary" href="{% url 'new_plan' %}">Start a New Plan</a>
+        {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
