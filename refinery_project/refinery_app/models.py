@@ -15,7 +15,7 @@ class CustomUser(AbstractUser):
 
 class Plan(models.Model):
     current_book = models.ForeignKey("Book", on_delete=models.RESTRICT, related_name="current_plan")
-    previous_stop = models.ForeignKey("Verse", on_delete=models.RESTRICT, related_name="current_plan")
+    previous_stop = models.ForeignKey("Verse", on_delete=models.RESTRICT, related_name="_current_plan")
     current_stop = models.ForeignKey("Verse", on_delete=models.RESTRICT, related_name="current_plan")
     verses_per_day = models.SmallIntegerField(choices=[(i, i) for i in range(1, 11)])
     days_of_review = models.SmallIntegerField(default=100)
