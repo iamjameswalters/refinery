@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.urls import reverse_lazy
 
 from pible import Bible
 
@@ -22,16 +23,16 @@ class Plan(models.Model):
     translation = models.CharField(choices=TRANSLATIONS, max_length=5)
     api_key = models.CharField(max_length=40, blank=True)
 
+    def get_absolute_url(self):
+        return reverse("home")
+    
+
     class Meta:
         constraints = [
             models.CheckConstraint(
                 check=models.Q(translation="ESV", api_key__isnull=False)
                 | ~models.Q(translation="ESV"),
                 name="require_api_key_for_esv",
-            ),
-            models.CheckConstraint(
-                check=~models.Q(previous_verse=models.F('current_verse')),
-                name="different_current_and_previous_verses"
             )
         ]
 
