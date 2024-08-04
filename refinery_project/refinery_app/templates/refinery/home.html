@@ -1,18 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="d-flex align-items-center justify-content-center h-100">
+<div class="d-flex pt-5 justify-content-center h-100">
     <div>
         <h1 class="text-center mb-5">Refinery</h1>
 
         <div class="text-center fs-3">
         {% if plan %}
-        You're working your way through<br />{{plan.current_book.title}}
+            {% if not plan.current_book %}
+            You're ready to start a new book.
+            <br /><br />
+            <a class="btn btn-primary" href="{% url 'new_book' %}">Select a Book</a>
+            {% else %}
+            You're working your way through<br />{{plan.current_book.title}}
+            {% if plan.current_stop %}
+            <br /><br />You left off at {{plan.current_stop.chapter}}:{{plan.current_stop.verse_number}}.
+            {% endif %}
 
-        <br /><br />You left off at {{plan.current_stop.chapter}}:{{plan.current_stop.verse_number}}.
-
-        <br /><br />Ready to get back at it?
-        <br /><br />
-        <a class="btn btn-primary" href="#">Start Today's Verses</a>
+            <br /><br />Ready to get to it?
+            <br /><br />
+            <a class="btn btn-primary" href="#">Start Today's Verses</a>
+            {% endif %}
 
         {% else %}
         Refinery is an app for memorizing books of the Bible.

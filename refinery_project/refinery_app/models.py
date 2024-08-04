@@ -42,6 +42,9 @@ class Book(models.Model):
     title = models.CharField(choices={book._title: book._title for book in Bible().books}, max_length=50)
     completed = models.BooleanField(default=False)
 
+    def get_absolute_url(self):
+        return reverse_lazy("home")
+
 
 class Verse(models.Model):
     plan = models.ForeignKey(Plan, on_delete=models.CASCADE)
