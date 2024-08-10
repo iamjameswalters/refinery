@@ -15,9 +15,15 @@ class CustomUser(AbstractUser):
 
 
 class Plan(models.Model):
-    current_book = models.ForeignKey("Book", on_delete=models.RESTRICT, related_name="current_plan", null=True)
-    previous_stop = models.ForeignKey("Verse", on_delete=models.RESTRICT, related_name="_current_plan", null=True)
-    current_stop = models.ForeignKey("Verse", on_delete=models.RESTRICT, related_name="current_plan", null=True)
+    current_book = models.ForeignKey(
+        "Book", on_delete=models.RESTRICT, related_name="current_plan", null=True
+    )
+    previous_stop = models.ForeignKey(
+        "Verse", on_delete=models.RESTRICT, related_name="_current_plan", null=True
+    )
+    current_stop = models.ForeignKey(
+        "Verse", on_delete=models.RESTRICT, related_name="current_plan", null=True
+    )
     verses_per_day = models.SmallIntegerField(choices=[(i, i) for i in range(1, 11)])
     days_of_review = models.SmallIntegerField(default=100)
     translation = models.CharField(choices=TRANSLATIONS, max_length=5)
@@ -25,7 +31,6 @@ class Plan(models.Model):
 
     def get_absolute_url(self):
         return reverse_lazy("home")
-    
 
     class Meta:
         constraints = [
@@ -39,7 +44,9 @@ class Plan(models.Model):
 
 class Book(models.Model):
     plan = models.ForeignKey(Plan, on_delete=models.CASCADE)
-    title = models.CharField(choices={book._title: book._title for book in Bible().books}, max_length=50)
+    title = models.CharField(
+        choices={book._title: book._title for book in Bible().books}, max_length=50
+    )
     completed = models.BooleanField(default=False)
 
     def get_absolute_url(self):
@@ -48,7 +55,16 @@ class Book(models.Model):
 
 class Verse(models.Model):
     plan = models.ForeignKey(Plan, on_delete=models.CASCADE)
-    book = models.CharField(choices={book._title: book._title for book in Bible().books}, max_length=50)
+    book = models.CharField(
+        choices={book._title: book._title for book in Bible().books}, max_length=50
+    )
     chapter = models.SmallIntegerField()
     verse_number = models.SmallIntegerField()
     days_reviewed = models.SmallIntegerField(default=1)
+
+    def get_verse(self):
+        bible = Bible(
+            translation=self.plan.translation,
+            api_key=plan.api_key if self.plan.translation == "ESV" else None,
+        )
+        return bible[self.book][self.chapter][self.verse_number]
