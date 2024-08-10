@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_browser_reload",
     "django_bootstrap5",
-    "refinery_app"
+    "refinery_app",
 ]
 
 MIDDLEWARE = [

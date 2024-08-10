@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("refinery_app", "0002_rename_current_verse_plan_current_stop_and_more"),
     ]
