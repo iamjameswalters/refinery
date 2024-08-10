@@ -98,13 +98,13 @@ django = ">=3.2"
 
 [[package]]
 name = "pible"
-version = "0.2"
+version = "0.3"
 description = "A Python library for working with Bible books and verses."
 optional = false
 python-versions = "*"
 files = [
-    {file = "pible-0.2-py2.py3-none-any.whl", hash = "sha256:a40388d502b9a0cad81451829fc8511f931dc4f91679521f037411f6a7ff15a9"},
-    {file = "pible-0.2.tar.gz", hash = "sha256:285768b073e9cdde1f45ee6f886411a42463d4c1914c60d61b960616d2f7f4ee"},
+    {file = "pible-0.3-py2.py3-none-any.whl", hash = "sha256:6ac9f2ab85aa9d9158fa2da175ff02172ca0bb1b4e8f1aff9a709adc40eda43b"},
+    {file = "pible-0.3.tar.gz", hash = "sha256:0e70e85c015e73466bec29c67b38ec84ddc7d039aea5d77904e39a1c1159f708"},
 ]
 
 [package.extras]
@@ -177,4 +177,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "43e3aeed441055da0a2206a532797f0618ad4132a4d3faa75ae5dae037c65847"
+content-hash = "9209f62cac0d3b93e2a768ff226613542bf028e3b97cc32c4ec16566a8509ac2"
