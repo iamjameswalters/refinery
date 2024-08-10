@@ -11,6 +11,7 @@ Django = "^5.0.6"
 django-htmx = "^1.18.0"
 pible = "^0.2"
 django-bootstrap5 = "^24.2"
+django-browser-reload = "^1.13.0"
 
 [tool.poetry.group.dev.dependencies]
 django-debug-toolbar = "^4.4.2"
