@@ -15,15 +15,6 @@ class CustomUser(AbstractUser):
 
 
 class Plan(models.Model):
-    current_book = models.ForeignKey(
-        "Book", on_delete=models.RESTRICT, related_name="current_plan", null=True
-    )
-    previous_stop = models.ForeignKey(
-        "Verse", on_delete=models.RESTRICT, related_name="_current_plan", null=True
-    )
-    current_stop = models.ForeignKey(
-        "Verse", on_delete=models.RESTRICT, related_name="current_plan", null=True
-    )
     verses_per_day = models.SmallIntegerField(choices=[(i, i) for i in range(1, 11)])
     days_of_review = models.SmallIntegerField(default=100)
     translation = models.CharField(choices=TRANSLATIONS, max_length=5)
@@ -31,6 +22,9 @@ class Plan(models.Model):
 
     def get_absolute_url(self):
         return reverse_lazy("home")
+
+    def get_current_book(self):
+        return self.book_set.get(completed=False)
 
     class Meta:
         constraints = [
@@ -62,9 +56,12 @@ class Verse(models.Model):
     verse_number = models.SmallIntegerField()
     days_reviewed = models.SmallIntegerField(default=1)
 
+    def __str__(self):
+        return f"{self.book.title} {self.chapter}:{self.verse_number}"
+
     def get_verse(self):
         bible = Bible(
             translation=self.plan.translation,
-            api_key=plan.api_key if self.plan.translation == "ESV" else None,
+            api_key=self.plan.api_key if self.plan.translation == "ESV" else None,
         )
         return bible[self.book][self.chapter][self.verse_number]
