@@ -1,0 +1,11 @@
+[Unit]
+Description=Refinery gunicorn daemon
+After=network.target
+
+[Service]
+User=james
+WorkingDirectory=/home/james/git/refinery/refinery_project
+ExecStart=/home/james/git/refinery/venv/bin/python3 -m gunicorn --workers=2 "refinery_project.wsgi:application"
+
+[Install]
+WantedBy=default.target
