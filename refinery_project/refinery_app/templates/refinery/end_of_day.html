@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex pt-5 justify-content-center h-100">
+    <div>
+        <h1 class="text-center mb-5">Well done!</h1>
+        <div class="text-center fs-3">
+            <p class="my-4">
+                That's another day of scripture memory under your belt. See you tomorrow!
+            </p>
+            <a href="{% url 'home' %}" class="btn btn-primary">
+                See you later!
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

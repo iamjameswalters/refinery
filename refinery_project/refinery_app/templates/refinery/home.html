@@ -7,7 +7,7 @@
         </h1>
         <div class="text-center fs-3">
             {% if plan %}
-                {% if not plan.current_book %}
+                {% if not plan.get_current_book %}
                     <p class="my-4">
                         You're ready to start a new book.
                     </p>
@@ -17,19 +17,19 @@
                 {% else %}
                     <p class="my-4">
                         You're working your way through
-                        <br />{{plan.current_book.title}}
+                        <br />{{plan.get_current_book.title}}
                     </p>
-                    {% if plan.current_stop %}
+                    {% if plan.get_current_book.verse_set.last %}
                         <p class="my-4">
-                            You left off at {{plan.current_stop.chapter}}:{{plan.current_stop.verse_number}}.
+                            You left off at {{plan.get_current_book.verse_set.last.chapter}}:{{plan.get_current_book.verse_set.last.verse_number}}.
                         </p>
                     {% endif %}
                     <p class="my-4">
                         Ready to get to it?
                     </p>
                 
-                    <a class="btn btn-primary" href="{% url 'start' %}">
-                        Start Today's Verses
+                    <a class="btn btn-primary" href="{% url 'prev_verses' %}">
+                        Let's go!
                     </a>
                 {% endif %}
             {% else %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex pt-5 justify-content-center h-100">
+    <div>
+        <h1 class="text-center mb-5">
+            Learn Today's Verses
+        </h1>
+        <div class="text-center fs-3">
+            <p class="my-4">
+                {{verse.address}} &mdash; {{verse}}
+            </p>
+            <p class="my-4">
+                Repeat this verse ten times to continue.
+            </p>
+            <form method="post">
+                {% csrf_token %}
+                <button class="btn btn-primary" type="submit" _="init set times to 1
+                on click increment times then if times is less than 10 then put `Repeated ${times} times` into my innerText end">
+                    Okay
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
