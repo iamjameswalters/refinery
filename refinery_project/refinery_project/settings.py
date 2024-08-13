@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,10 +38,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django_browser_reload",
     "django_bootstrap5",
     "refinery_app",
 ]
+
+# If using manage.py runserver, turn on django-browser-reload
+if os.environ.get('RUN_MAIN', ''):
+    INSTALLED_APPS.append('django_browser_reload')
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -51,8 +55,11 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
+
+# If using manage.py runserver, turn on django-browser-reload
+if os.environ.get('RUN_MAIN', ''):
+    MIDDLEWARE.append("django_browser_reload.middleware.BrowserReloadMiddleware")
 
 ROOT_URLCONF = "refinery_project.urls"
 
