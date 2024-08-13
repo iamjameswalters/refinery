@@ -44,7 +44,6 @@ class NewBook(CreateView):
 
 
 def previous_verses(request):
-    plan = getPlan()
     yesterdays_verses = models.Verse.objects.filter(days_reviewed=1)
     if len(yesterdays_verses) == 0:
         return redirect("next_verses")
@@ -54,20 +53,7 @@ def previous_verses(request):
         for verse in yesterdays_verses
     )
 
-    if (
-        len(
-            models.Verse.objects.filter(
-                days_reviewed__lt=plan.days_of_review, days_reviewed__gt=1
-            )
-        )
-        > 0
-    ):
-        next_page = "review_verses"
-    else:
-        next_page = "next_verses"
-    return render(
-        request, "refinery/prev_verses.html", {"verses": verses, "next_page": next_page}
-    )
+    return render(request, "refinery/prev_verses.html", {"verses": verses})
 
 
 def review_verses(request):
