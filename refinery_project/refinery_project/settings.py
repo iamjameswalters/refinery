@@ -43,8 +43,8 @@ INSTALLED_APPS = [
 ]
 
 # If using manage.py runserver, turn on django-browser-reload
-if os.environ.get('RUN_MAIN', ''):
-    INSTALLED_APPS.append('django_browser_reload')
+if os.environ.get("RUN_MAIN", ""):
+    INSTALLED_APPS.append("django_browser_reload")
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -58,7 +58,7 @@ MIDDLEWARE = [
 ]
 
 # If using manage.py runserver, turn on django-browser-reload
-if os.environ.get('RUN_MAIN', ''):
+if os.environ.get("RUN_MAIN", ""):
     MIDDLEWARE.append("django_browser_reload.middleware.BrowserReloadMiddleware")
 
 ROOT_URLCONF = "refinery_project.urls"
