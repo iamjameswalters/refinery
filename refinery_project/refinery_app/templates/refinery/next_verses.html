@@ -14,8 +14,12 @@
             </p>
             <form method="post">
                 {% csrf_token %}
-                <button class="btn btn-primary" type="submit" _="init set times to 1
-                on click increment times then if times is less than 10 then put `Repeated ${times} times` into my innerText end">
+                <button class="btn btn-primary" type="submit" _="init set :times to 0 end
+                on click halt the event then increment :times then
+                  if :times is less than 10 then put `Repeated ${:times} time(s)` into my innerText 
+                  else trigger submit on the closest <form/> 
+                  end
+                end">
                     Okay
                 </button>
             </form>

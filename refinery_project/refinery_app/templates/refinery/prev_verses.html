@@ -15,8 +15,11 @@
             <p class="text-center my-4">
                 <a class="btn btn-primary" 
                 href="{% url 'review_verses' %}"
-                _="init set times to 1
-                on click increment times then if times is less than 10 then put `Repeated ${times} times` into my innerText end">
+                _="init set :times to 0 end on click halt the event then increment :times then
+                  if :times is less than 10 then put `Repeated ${:times} time(s)` into my innerText 
+                  else go to my @href 
+                  end
+                end">
                     Okay
                 </a>
             </p>
